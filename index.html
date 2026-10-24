@@ -6,6 +6,9 @@
   <title>NovaVerse | Superhero & Heroines Hub</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
@@ -17,9 +20,14 @@
 
   <main class="container">
     <section class="controls">
-      <div class="controls__group">
+      <div class="controls__group controls__group--search">
         <label for="search-input">Search character</label>
-        <input type="text" id="search-input" placeholder="e.g. Wanda, Spider-Man, Batman...">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="e.g. Wanda, Spider-Man, Batman...">
+          <button type="button" id="btn-search" class="btn-search" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+        </div>
       </div>
 
       <div class="controls__group">
@@ -57,18 +65,18 @@
 
     <section id="heroes-grid" class="heroes-grid" aria-live="polite"></section>
 
-    <nav class="pagination" aria-label="Pagination Navigation">
-      <button id="btn-first" class="pagination__btn" title="First page"><i class="fa-solid fa-angles-left"></i></button>
-      <button id="btn-prev" class="pagination__btn" title="Previous page"><i class="fa-solid fa-angle-left"></i></button>
-      <span id="page-display" class="pagination__indicator">Page 1 of 1</span>
-      <button id="btn-next" class="pagination__btn" title="Next page"><i class="fa-solid fa-angle-right"></i></button>
-      <button id="btn-last" class="pagination__btn" title="Last page"><i class="fa-solid fa-angles-right"></i></button>
-    </nav>
+<nav class="pagination">
+  <button id="btn-first" class="pagination__btn" aria-label="First page">&laquo;</button>
+  <button id="btn-prev" class="pagination__btn" aria-label="Previous page">&lsaquo;</button>
+  <span id="page-indicator" class="pagination__indicator">Page 1 of 29</span>
+  <button id="btn-next" class="pagination__btn" aria-label="Next page">&rsaquo;</button>
+  <button id="btn-last" class="pagination__btn" aria-label="Last page">&raquo;</button>
+</nav>
   </main>
 
-  <div id="hero-modal" class="modal hidden" role="dialog" aria-modal="true">
+<div id="hero-modal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal__backdrop" id="modal-backdrop"></div>
-    <div class="modal__content" id="modal-body"></div>
+    <div class="modal__content" id="modal-content"></div>
   </div>
 
   <script src="js/main.js"></script>
