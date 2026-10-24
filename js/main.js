@@ -22,10 +22,6 @@ const btnLast = document.getElementById('btn-last');
 const pageIndicator = document.getElementById('page-indicator');
 
 
-const heroModal = document.getElementById('hero-modal');
-const modalContent = document.getElementById('modal-content');
-const modalBackdrop = document.getElementById('modal-backdrop');
-
 // api
 async function fetchHeroes() {
   try {
@@ -80,7 +76,7 @@ function applyFilters() {
   filteredHeroes.sort((a, b) => {
     const nameA = (a.name || '').trim().toLowerCase();
     const nameB = (b.name || '').trim().toLowerCase();
-    return sortOrder === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(a.name);
+    return sortOrder === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
   });
 
   currentPage = 1;
@@ -162,10 +158,11 @@ function goToPage(page) {
 }
 
 // 5 detalles
+
 function openHeroDetails(hero) {
   const modal = document.getElementById('hero-modal');
-  const target = document.getElementById('modal-content');
-  if (!modal || !target) return;
+  const modalBody = document.getElementById('modal-body');
+  if (!modal || !modalBody) return;
 
   const stats = hero.powerstats || {};
   const bio = hero.biography || {};
@@ -189,74 +186,66 @@ function openHeroDetails(hero) {
     `;
   };
 
-  target.innerHTML = `
-    <button type="button" class="modal__close" id="modal-close" aria-label="Close modal">&times;</button>
-    
+  modalBody.innerHTML = `
     <div class="hero-dossier">
+      <!-- Columna Izquierda: Información Biográfica -->
       <div class="hero-dossier__bio">
         <h2 class="hero-dossier__title">${hero.name}</h2>
         <div class="hero-dossier__field">
-          <strong>Real Name:</strong>
-          <span>${bio.fullName && bio.fullName.trim() !== '' ? bio.fullName : 'Classified'}</span>
+          <strong>REAL NAME:</strong>
+          <span>${bio.fullName && bio.fullName.trim() !== '' ? bio.fullName : 'CLASSIFIED'}</span>
         </div>
         <div class="hero-dossier__field">
-          <strong>Publisher:</strong>
-          <span>${bio.publisher || 'Independent'}</span>
+          <strong>PUBLISHER:</strong>
+          <span>${bio.publisher || 'INDEPENDENT'}</span>
         </div>
         <div class="hero-dossier__field">
-          <strong>Alignment:</strong>
+          <strong>ALIGNMENT:</strong>
           <span class="badge-status">${(bio.alignment || 'neutral').toUpperCase()}</span>
         </div>
         <div class="hero-dossier__field">
-          <strong>Height / Weight:</strong>
+          <strong>HEIGHT / WEIGHT:</strong>
           <span>${appearance.height?.[1] || '-'} / ${appearance.weight?.[1] || '-'}</span>
         </div>
         <div class="hero-dossier__field">
-          <strong>Place of Birth:</strong>
-          <span>${bio.placeOfBirth || 'Unknown'}</span>
+          <strong>PLACE OF BIRTH:</strong>
+          <span>${bio.placeOfBirth || 'UNKNOWN'}</span>
         </div>
         <div class="hero-dossier__field">
-          <strong>Occupation:</strong>
-          <span>${work.occupation || 'Unknown'}</span>
+          <strong>OCCUPATION:</strong>
+          <span>${work.occupation || 'UNKNOWN'}</span>
         </div>
         <div class="hero-dossier__field">
-          <strong>Affiliations:</strong>
-          <span>${connections.groupAffiliation || 'None registered'}</span>
+          <strong>AFFILIATIONS:</strong>
+          <span>${connections.groupAffiliation || 'NONE REGISTERED'}</span>
         </div>
       </div>
 
+      <!-- Columna Derecha: Pantalla de Avatar y Barras -->
       <div class="hero-dossier__stats">
         <div class="hero-dossier__avatar-wrapper">
           <img src="${hero.images?.lg || hero.images?.md || hero.images?.sm}" alt="${hero.name}">
         </div>
 
         <div class="stats-container">
-          <h4 class="stats-container__heading">Power Level Metrics</h4>
-          ${renderStatBar('Intelligence', stats.intelligence)}
-          ${renderStatBar('Strength', stats.strength)}
-          ${renderStatBar('Speed', stats.speed)}
-          ${renderStatBar('Durability', stats.durability)}
-          ${renderStatBar('Power', stats.power)}
-          ${renderStatBar('Combat', stats.combat)}
+          <h4 class="stats-container__heading">POWER LEVEL METRICS</h4>
+          ${renderStatBar('INTELLIGENCE', stats.intelligence)}
+          ${renderStatBar('STRENGTH', stats.strength)}
+          ${renderStatBar('SPEED', stats.speed)}
+          ${renderStatBar('DURABILITY', stats.durability)}
+          ${renderStatBar('POWER', stats.power)}
+          ${renderStatBar('COMBAT', stats.combat)}
         </div>
       </div>
     </div>
   `;
 
   modal.classList.remove('hidden');
-
-  
-  const closeBtn = document.getElementById('modal-close');
-  if (closeBtn) {
-    closeBtn.onclick = closeHeroModal;
-  }
 }
 
 function closeHeroModal() {
   const modal = document.getElementById('hero-modal');
-  if (modal) {
-    modal.classList.add('hidden');
-  }
+  if (modal) modal.classList.add('hidden');
 }
 
 
@@ -267,6 +256,8 @@ function setupEventListeners() {
       if (e.key === 'Enter') applyFilters();
     });
   }
+  
+  
 
   if (btnSearch) btnSearch.addEventListener('click', applyFilters);
   if (orderSelect) orderSelect.addEventListener('change', applyFilters);
@@ -280,6 +271,11 @@ function setupEventListeners() {
     const totalPages = Math.ceil(filteredHeroes.length / itemsPerPage) || 1;
     goToPage(totalPages);
   });
+
+const modalClose = document.getElementById('modal-close');
+  if (modalClose) {
+    modalClose.addEventListener('click', closeHeroModal);
+  }
 
   const modalBackdrop = document.getElementById('modal-backdrop');
   if (modalBackdrop) {
