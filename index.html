@@ -74,9 +74,16 @@
 </nav>
   </main>
 
-<div id="hero-modal" class="modal hidden" role="dialog" aria-modal="true">
+
+  <div id="hero-modal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal__backdrop" id="modal-backdrop"></div>
-    <div class="modal__content" id="modal-content"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <span class="modal__system-tag">&gt;&gt; SYSTEM_TERMINAL // DATA_RECORD</span>
+        <button type="button" class="modal__close" id="modal-close" aria-label="Close modal">[ X ]</button>
+      </div>
+      <div id="modal-body" class="modal__body"></div>
+    </div>
   </div>
 
   <script src="js/main.js"></script>
