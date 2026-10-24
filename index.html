@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaVerse | Superhero & Heroines Hub</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="header__title">
+    <i class="fa-solid fa-bolt-lightning"></i> NovaVerse
+  </h1>
+  <p class="header__subtitle">Multiverse Directory: Heroines, Heroes & Comic Legends</p>
+</header>
+
+  <main class="container">
+    <section class="controls">
+      <div class="controls__group">
+        <label for="search-input">Search character</label>
+        <input type="text" id="search-input" placeholder="e.g. Wanda, Spider-Man, Batman...">
+      </div>
+
+      <div class="controls__group">
+        <label for="order-select">Alphabetical Order</label>
+        <select id="order-select">
+          <option value="asc">A to Z (Ascending)</option>
+          <option value="desc">Z to A (Descending)</option>
+        </select>
+      </div>
+
+      <div class="controls__group">
+        <label for="gender-select">Character Category</label>
+        <select id="gender-select">
+          <option value="all">All Characters</option>
+          <option value="Female">Heroines & Villainesses</option>
+          <option value="Male">Heroes & Villains</option>
+        </select>
+      </div>
+
+      <div class="controls__group">
+        <label for="publisher-select">Publisher</label>
+        <select id="publisher-select">
+          <option value="all">All Publishers</option>
+          <option value="Marvel Comics">Marvel Comics</option>
+          <option value="DC Comics">DC Comics</option>
+          <option value="Dark Horse Comics">Dark Horse</option>
+          <option value="Other">Other Publishers</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="status-bar">
+      <span id="results-count">Total results: 0</span>
+    </div>
+
+    <section id="heroes-grid" class="heroes-grid" aria-live="polite"></section>
+
+    <nav class="pagination" aria-label="Pagination Navigation">
+      <button id="btn-first" class="pagination__btn" title="First page"><i class="fa-solid fa-angles-left"></i></button>
+      <button id="btn-prev" class="pagination__btn" title="Previous page"><i class="fa-solid fa-angle-left"></i></button>
+      <span id="page-display" class="pagination__indicator">Page 1 of 1</span>
+      <button id="btn-next" class="pagination__btn" title="Next page"><i class="fa-solid fa-angle-right"></i></button>
+      <button id="btn-last" class="pagination__btn" title="Last page"><i class="fa-solid fa-angles-right"></i></button>
+    </nav>
+  </main>
+
+  <div id="hero-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__content" id="modal-body"></div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
